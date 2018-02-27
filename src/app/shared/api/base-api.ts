@@ -6,7 +6,8 @@ import {Observable} from 'rxjs/Observable';
 export class BaseApi {
   private baseUrl = 'https://intense-taiga-49656.herokuapp.com/';
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) {
+  }
 
   private getUrl(url: string = ''): string {
     return this.baseUrl + url;
@@ -22,6 +23,10 @@ export class BaseApi {
 
   public put(url: string = '', data: any = {}): Observable<any> {
     return this.http.put(this.getUrl(url), data);
+  }
+
+  public delete(url: string = '', data: any = {}): Observable<any> {
+    return this.http.delete(this.getUrl(url), data);
   }
 
 }

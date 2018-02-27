@@ -1,4 +1,5 @@
-<div class="row">
+<div class="container-fluid">
+  <div class="row">
   <div class="col">
     <h3 class="text-center">Список слов</h3>
     <table class="table table-striped">
@@ -16,7 +17,7 @@
         <td>{{word.name}}</td>
         <td>{{word.ruName}}</td>
         <td
-        (click)="onWordDelete()"
+        (click)="onWordDelete(word)"
         >
           <button class="btn btn-danger">Удалить</button>
         </td>
@@ -24,4 +25,5 @@
       </tbody>
     </table>
   </div>
+</div>
 </div>

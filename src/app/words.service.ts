@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Words} from './shared/models/words.model';
 import {BaseApi} from './shared/api/base-api';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable()
-export class WordsService extends BaseApi{
+export class WordsService extends BaseApi {
 
   constructor(public http: HttpClient) {
     super(http);
@@ -23,4 +23,7 @@ export class WordsService extends BaseApi{
     return this.put(`words/${word.id}`, word);
   }
 
+  deleteWord(word: Words): Observable<Words> {
+    return this.delete(`words/${word.id}`, word);
+  }
 }

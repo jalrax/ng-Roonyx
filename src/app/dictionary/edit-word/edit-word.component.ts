@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Words} from '../../shared/models/words.model';
 import {Subscription} from 'rxjs/Subscription';
+
+import {Words} from '../../shared/models/words.model';
 import {WordsService} from '../../words.service';
 
 @Component({
@@ -9,25 +10,32 @@ import {WordsService} from '../../words.service';
   templateUrl: './edit-word.component.html',
   styleUrls: ['./edit-word.component.css']
 })
-export class EditWordComponent implements OnInit {
+export class EditWordComponent implements OnInit, OnDestroy {
 
   @Input() words: Words[] = [];
   @Output() wordEdit = new EventEmitter<Words>();
 
   sub1: Subscription;
   form: FormGroup;
-  currentWordId = 1;
+  currentWordId;
   currentWord: Words;
 
   constructor(private wordsService: WordsService) {
   }
 
   ngOnInit() {
+    this.currentWordId = this.words[0].id;
     this.onCategoryChange();
     this.form = new FormGroup({
       'name': new FormControl(null, [Validators.required]),
       'ruName': new FormControl(null, [Validators.required])
     });
+  }
+
+  ngOnDestroy() {
+    if (this.sub1) {
+      this.sub1.unsubscribe();
+    }
   }
 
   onSubmit() {

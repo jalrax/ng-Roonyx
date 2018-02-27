@@ -1,7 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Words} from '../../shared/models/words.model';
 import {Subscription} from 'rxjs/Subscription';
+
+import {Words} from '../../shared/models/words.model';
 import {WordsService} from '../../words.service';
 
 @Component({
@@ -9,7 +10,7 @@ import {WordsService} from '../../words.service';
   templateUrl: './add-word.component.html',
   styleUrls: ['./add-word.component.css']
 })
-export class AddWordComponent implements OnInit {
+export class AddWordComponent implements OnInit, OnDestroy {
 
   @Output() wordAdd = new EventEmitter<Words>();
   form: FormGroup;
@@ -26,12 +27,16 @@ export class AddWordComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    if (this.sub1) {
+      this.sub1.unsubscribe();
+    }
+  }
+
   onSubmit() {
     const formData = this.form.value;
-    console.log(formData, 'formData');
     this.sub1 = this.wordsService.addWord(formData)
       .subscribe((word: Words) => {
-        console.log(word, 'word');
         this.form.reset();
         this.wordAdd.emit(word);
       });

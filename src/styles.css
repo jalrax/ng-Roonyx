@@ -2,3 +2,7 @@
 .has-error span {
   color: red;
 }
+
+.container-fluid {
+  width: 90%;
+}
