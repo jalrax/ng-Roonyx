@@ -1,0 +1,67 @@
+<div class="card">
+  <div class="card-block">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label class="control-label" for="edit-select-category">Выберите слово</label>
+        <select
+          class="form-control"
+          id="edit-select-category"
+          [(ngModel)]="currentWordId"
+          [ngModelOptions]="{standalone: true}"
+          (change)="onCategoryChange()"
+        >
+          <option
+            *ngFor="let word of words"
+            [value]="word.id"
+          >
+            {{capitalizeFirstLetter(word.name)}}
+          </option>
+        </select>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched}"
+      >
+        <label class="control-label" for="edit-category-name">Изменить слово</label>
+        <input
+          type="text"
+          id="edit-category-name"
+          class="form-control"
+          formControlName="name"
+          [ngModel]="currentWord.name"
+        >
+        <span
+          *ngIf="form.get('name').invalid && form.get('name').touched"
+          class="form-help-text"
+        >
+          <span *ngIf="form.get('name')['errors']['required']">Это поле не может быть пустым</span>
+        </span>
+      </div>
+      <div
+        class="form-group"
+        [ngClass]="{'has-error': form.get('ruName').invalid && form.get('ruName').touched}"
+      >
+        <label class="control-label" for="edit-category-value">Укажите перевод</label>
+        <input
+          type="text"
+          id="edit-category-value"
+          class="form-control"
+          formControlName="ruName"
+          [ngModel]="currentWord.ruName"
+        >
+        <span
+          class="form-help-text"
+          *ngIf="form.get('ruName').invalid && form.get('ruName').touched"
+        >
+          <span *ngIf="form.get('ruName')['errors']['required']">Это поле не может быть пустым</span>
+        </span>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="form.invalid"
+      >Редактировать
+      </button>
+    </form>
+  </div>
+</div>

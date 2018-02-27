@@ -1,0 +1,22 @@
+<section class="section text-center" *ngIf="!isLoaded">Loading...</section>
+<section class="section" *ngIf="isLoaded">
+  <div class="text-center">
+    <h1>Roonyx-test-app</h1>
+  </div>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <app-add-word (wordAdd)="newWordAdded($event)"></app-add-word>
+      </div>
+      <div class="col">
+        <app-edit-word
+          [words]="words"
+          (wordEdit)="wordWasEdited($event)"
+        ></app-edit-word>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <app-list-word [words]="words"></app-list-word>
+</section>
