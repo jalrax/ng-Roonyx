@@ -1,8 +1,15 @@
+<div class="text-center">
+  <h1>Roonyx-test-app</h1>
+</div>
+<hr>
+<div class="text-center">
+  <button
+    class="btn btn-success"
+    [routerLink]="['/testing']"
+  >Перейти к тесту</button>
+</div>
 <section class="section text-center" *ngIf="!isLoaded">Loading...</section>
 <section class="section" *ngIf="isLoaded">
-  <div class="text-center">
-    <h1>Roonyx-test-app</h1>
-  </div>
   <hr>
   <div class="container-fluid">
     <div class="row">

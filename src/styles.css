@@ -1,8 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 .has-error span {
-  color: red;
+  color: #fb494d;
 }
 
 .container-fluid {
   width: 90%;
+}
+
+.form-group.has-error .form-control {
+  border-color: #fb494d;
+}
+
+.btn.disabled, .btn:disabled {
+  cursor: not-allowed;
 }

@@ -9,6 +9,9 @@ import {AddWordComponent} from './dictionary/add-word/add-word.component';
 import {EditWordComponent} from './dictionary/edit-word/edit-word.component';
 import {ListWordComponent} from './dictionary/list-word/list-word.component';
 import {WordsService} from './words.service';
+import {AppRoutingModule} from './app-routing.module';
+import {NotFoundComponent} from './shared/components/not-found/not-found.component';
+import { TestingComponent } from './testing/testing.component';
 
 
 @NgModule({
@@ -17,13 +20,16 @@ import {WordsService} from './words.service';
     DictionaryComponent,
     AddWordComponent,
     EditWordComponent,
-    ListWordComponent
+    ListWordComponent,
+    NotFoundComponent,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [WordsService],
   bootstrap: [AppComponent]
