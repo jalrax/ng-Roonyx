@@ -4,11 +4,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
 import {DictionaryComponent} from './dictionary/dictionary.component';
 import {TestingComponent} from './testing/testing.component';
+import {ResultComponent} from './testing/result/result.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dictionary', pathMatch: 'full'},
   {path: 'dictionary', component: DictionaryComponent},
   {path: 'testing', component: TestingComponent},
+  {path: 'result', component: ResultComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '404'}
 ];

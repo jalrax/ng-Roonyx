@@ -12,6 +12,7 @@ import {WordsService} from './words.service';
 import {AppRoutingModule} from './app-routing.module';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
 import { TestingComponent } from './testing/testing.component';
+import {ResultComponent} from './testing/result/result.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TestingComponent } from './testing/testing.component';
     EditWordComponent,
     ListWordComponent,
     NotFoundComponent,
-    TestingComponent
+    TestingComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,
