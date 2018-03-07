@@ -13,26 +13,44 @@ import 'rxjs/add/operator/map';
 export class TestingComponent implements OnInit, OnDestroy {
 
   words: Words[] = [];
+  wordsBuffer = [];
+  slicedWords = [];
+  options = [];
+  buffer;
   isLoaded = false;
   sub1: Subscription;
-  ruNames = [];
 
   qnProgress = 0;
   answers = [];
+  ruNames = [];
 
   constructor(private wordsService: WordsService, private router: Router) {
+  }
+
+  static shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  static shuffleNSlice(arr, sliceArg) {
+    const buffer = arr.slice(0, sliceArg);
+    return TestingComponent.shuffle(buffer);
   }
 
   ngOnInit() {
     this.sub1 = this.wordsService.getWords()
       .subscribe((words: Words[]) => {
-        console.log(words, 'words');
         this.words = words;
-        this.words.forEach((e) => {
-          this.ruNames.push(e.ruName);
+        this.wordsBuffer = this.words;
+        this.slicedWords = TestingComponent.shuffleNSlice(this.wordsBuffer, 21);
+        this.slicedWords.forEach((e) => {
+          this.options.push(e.ruName);
         });
+        this.options = TestingComponent.shuffleNSlice(this.options, 6);
         this.isLoaded = true;
-        console.log(this.ruNames, 'this.ruNames');
       });
   }
 
@@ -42,15 +60,24 @@ export class TestingComponent implements OnInit, OnDestroy {
     }
   }
 
-  Answer(qID, choice) {
-    this.answers.push({
-      'id': qID,
-      'answer': choice
+  Answer(choice, ruName) {
+    this.buffer = [];
+    this.options = [];
+
+    this.buffer = this.wordsBuffer;
+    this.buffer.forEach(e => {
+      this.options.push(e.ruName);
     });
+    this.options = TestingComponent.shuffleNSlice(this.options, 5);
+    this.options.push(this.slicedWords[this.qnProgress + 1].ruName);
+    this.options = TestingComponent.shuffle(this.options);
+
+    this.answers.push(choice);
+    this.ruNames.push(ruName);
     this.qnProgress++;
-    console.log(this.answers, 'answers');
-    if (this.qnProgress === 10) {
+    if (this.qnProgress === 20) {
       localStorage.setItem('answers', JSON.stringify(this.answers));
+      localStorage.setItem('ruNames', JSON.stringify(this.ruNames));
       this.router.navigate(['/result']);
     }
   }
