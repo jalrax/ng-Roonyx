@@ -5,8 +5,9 @@
 <div class="text-center">
   <button
     class="btn btn-success"
-    (click)="onButtonClick()"
-  >Перейти к тесту</button>
+    (click)="onButtonClick()">
+    Перейти к тесту
+  </button>
 </div>
 <section class="section text-center" *ngIf="!isLoaded">Loading...</section>
 <section class="section" *ngIf="isLoaded">
@@ -19,14 +20,14 @@
       <div class="col">
         <app-edit-word
           [words]="words"
-          (wordEdit)="wordWasEdited($event)"
-        ></app-edit-word>
+          (wordEdit)="wordWasEdited($event)">
+        </app-edit-word>
       </div>
     </div>
   </div>
   <hr>
   <app-list-word
     [words]="words"
-    (wordDelete)="wordDeleted($event)"
-  ></app-list-word>
+    (wordDelete)="wordDeleted($event)">
+  </app-list-word>
 </section>

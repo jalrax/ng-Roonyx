@@ -1,10 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import {NotFoundComponent} from './shared/components/not-found/not-found.component';
-import {DictionaryComponent} from './dictionary/dictionary.component';
-import {TestingComponent} from './testing/testing.component';
-import {ResultComponent} from './testing/result/result.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { DictionaryComponent } from './dictionary/dictionary.component';
+import { TestingComponent } from './testing/testing.component';
+import { ResultComponent } from './testing/result/result.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dictionary', pathMatch: 'full'},

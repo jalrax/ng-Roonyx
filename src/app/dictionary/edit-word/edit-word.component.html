@@ -1,65 +1,57 @@
 <div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label class="control-label" for="edit-word">Выберите слово</label>
-        <select
-          class="form-control"
-          id="edit-word"
-          [(ngModel)]="currentWordId"
-          [ngModelOptions]="{standalone: true}"
-          (change)="onCategoryChange()"
-        >
-          <option
-            *ngFor="let word of words"
-            [value]="word.id"
-          >
-            {{capitalizeFirstLetter(word.name)}}
-          </option>
-        </select>
-      </div>
-      <div
-        class="form-group"
-        [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched}"
-      >
-        <label class="control-label" for="edit-en-name">Изменить слово</label>
-        <input
-          type="text"
-          id="edit-en-name"
-          class="form-control"
-          formControlName="name"
-          [ngModel]="currentWord.name"
-        >
-        <span
-          *ngIf="form.get('name').invalid && form.get('name').touched"
-          class="form-help-text"
-        >
-          <span *ngIf="form.get('name')['errors']['required']">Это поле не может быть пустым</span>
-        </span>
-      </div>
-      <div
-        class="form-group"
-        [ngClass]="{'has-error': form.get('ruName').invalid && form.get('ruName').touched}"
-      >
-        <label class="control-label" for="edit-ru-name">Укажите перевод</label>
-        <input
-          type="text"
-          id="edit-ru-name"
-          class="form-control"
-          formControlName="ruName"
-          [ngModel]="currentWord.ruName"
-        >
-        <span
-          class="form-help-text"
-          *ngIf="form.get('ruName').invalid && form.get('ruName').touched"
-        >
-          <span *ngIf="form.get('ruName')['errors']['required']">Это поле не может быть пустым</span>
-        </span>
-      </div>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="form.invalid"
-      >Редактировать
-      </button>
-    </form>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label class="control-label" for="edit-word">Выберите слово</label>
+      <select
+        class="form-control"
+        id="edit-word"
+        [(ngModel)]="currentWordId"
+        [ngModelOptions]="{standalone: true}"
+        (change)="onCategoryChange()">
+        <option
+          *ngFor="let word of words"
+          [value]="word.id">
+          {{capitalizeFirstLetter(word.name)}}
+        </option>
+      </select>
+    </div>
+    <div
+      class="form-group"
+      [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched}">
+      <label class="control-label" for="edit-en-name">Изменить слово</label>
+      <input
+        type="text"
+        id="edit-en-name"
+        class="form-control"
+        formControlName="name"
+        [ngModel]="currentWord.name">
+      <span
+        *ngIf="form.get('name').invalid && form.get('name').touched"
+        class="form-help-text">
+        <span *ngIf="form.get('name')['errors']['required']">Это поле не может быть пустым</span>
+      </span>
+    </div>
+    <div
+      class="form-group"
+      [ngClass]="{'has-error': form.get('ruName').invalid && form.get('ruName').touched}">
+      <label class="control-label" for="edit-ru-name">Укажите перевод</label>
+      <input
+        type="text"
+        id="edit-ru-name"
+        class="form-control"
+        formControlName="ruName"
+        [ngModel]="currentWord.ruName">
+      <span
+        class="form-help-text"
+        *ngIf="form.get('ruName').invalid && form.get('ruName').touched">
+        <span *ngIf="form.get('ruName')['errors']['required']">Это поле не может быть пустым</span>
+      </span>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="form.invalid">
+      Редактировать
+    </button>
+  </form>
 </div>

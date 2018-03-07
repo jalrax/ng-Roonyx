@@ -1,9 +1,9 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 
-import {Words} from '../../shared/models/words.model';
-import {WordsService} from '../../words.service';
+import { Words } from '../../shared/models/words.model';
+import { WordsService } from '../../words.service';
 
 @Component({
   selector: 'app-add-word',
@@ -14,8 +14,8 @@ export class AddWordComponent implements OnInit, OnDestroy {
 
   @Output() wordAdd = new EventEmitter<Words>();
   form: FormGroup;
-  words: any[] = [];
-  sub1: Subscription;
+  words: Words[] = [];
+  subscription: Subscription;
 
   constructor(private wordsService: WordsService) {
   }
@@ -28,14 +28,15 @@ export class AddWordComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.sub1) {
-      this.sub1.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
   onSubmit() {
     const formData = this.form.value;
-    this.sub1 = this.wordsService.addWord(formData)
+    this.subscription = this.wordsService
+      .addWord(formData)
       .subscribe((word: Words) => {
         this.form.reset();
         this.wordAdd.emit(word);

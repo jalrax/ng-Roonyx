@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 
-import {Words} from '../../shared/models/words.model';
-import {WordsService} from '../../words.service';
+import { Words } from '../../shared/models/words.model';
+import { WordsService } from '../../words.service';
 
 @Component({
   selector: 'app-edit-word',
@@ -15,7 +15,7 @@ export class EditWordComponent implements OnInit, OnDestroy {
   @Input() words: Words[] = [];
   @Output() wordEdit = new EventEmitter<Words>();
 
-  sub1: Subscription;
+  subscription: Subscription;
   form: FormGroup;
   currentWordId;
   currentWord: Words;
@@ -33,15 +33,16 @@ export class EditWordComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.sub1) {
-      this.sub1.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
   onSubmit() {
     const formData = this.form.value;
     const word = new Words(formData.name, formData.ruName, +this.currentWordId);
-    this.sub1 = this.wordsService.updateWord(word)
+    this.subscription = this.wordsService
+      .updateWord(word)
       .subscribe((wordStream: Words) => {
         this.wordEdit.emit(wordStream);
       });

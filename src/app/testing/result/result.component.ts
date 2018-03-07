@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-result',
@@ -19,8 +19,8 @@ export class ResultComponent implements OnInit {
     }
     const answers = JSON.parse(localStorage.getItem('answers'));
     const ruNames = JSON.parse(localStorage.getItem('ruNames'));
-    answers.forEach((e, i) => {
-      if (e === ruNames[i]) {
+    answers.forEach((item, i) => {
+      if (item === ruNames[i]) {
         this.correctAnswerCount++;
       }
     });

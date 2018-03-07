@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Words} from './shared/models/words.model';
-import {BaseApi} from './shared/api/base-api';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Words } from './shared/models/words.model';
+import { BaseApi } from './shared/api/base-api';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class WordsService extends BaseApi {

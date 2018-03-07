@@ -1,9 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Words} from '../shared/models/words.model';
-import {Subscription} from 'rxjs/Subscription';
-import {WordsService} from '../words.service';
-import {Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
+
+import { WordsService } from '../words.service';
+import { Words } from '../shared/models/words.model';
 
 @Component({
   selector: 'app-testing',
@@ -13,16 +14,17 @@ import 'rxjs/add/operator/map';
 export class TestingComponent implements OnInit, OnDestroy {
 
   words: Words[] = [];
-  wordsBuffer = [];
-  slicedWords = [];
-  options = [];
-  buffer;
-  isLoaded = false;
-  sub1: Subscription;
+  wordsBuffer: Words[] = [];
+  slicedWords: Words[] = [];
+  buffer: Words[] = [];
 
+  options: string[] = [];
+  answers: string[] = [];
+  ruNames: string[] = [];
+
+  isLoaded = false;
+  subscription: Subscription;
   qnProgress = 0;
-  answers = [];
-  ruNames = [];
 
   constructor(private wordsService: WordsService, private router: Router) {
   }
@@ -41,7 +43,8 @@ export class TestingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.sub1 = this.wordsService.getWords()
+    this.subscription = this.wordsService
+      .getWords()
       .subscribe((words: Words[]) => {
         this.words = words;
         this.wordsBuffer = this.words;
@@ -55,8 +58,8 @@ export class TestingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.sub1) {
-      this.sub1.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
@@ -65,9 +68,9 @@ export class TestingComponent implements OnInit, OnDestroy {
     this.options = [];
 
     this.buffer = this.wordsBuffer;
-    this.buffer.forEach(e => {
-      if (e.ruName !== this.slicedWords[this.qnProgress + 1].ruName) {
-        this.options.push(e.ruName);
+    this.buffer.forEach(item => {
+      if (item.ruName !== this.slicedWords[this.qnProgress + 1].ruName) {
+        this.options.push(item.ruName);
       }
     });
     this.options = TestingComponent.shuffleNSlice(this.options, 5);

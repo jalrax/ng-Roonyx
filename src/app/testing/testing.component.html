@@ -5,28 +5,28 @@
 <hr>
 
 <div class="text-center" *ngIf="isLoaded === false">Loading...</div>
-<div class="container-fluid" *ngIf="isLoaded === true">
-  <div class="row">
-    <div class="col">
-      <div class="progress">
-        <div class="determinate" [style.width.%]="(qnProgress+1)*5"></div>
-      </div>
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">{{qnProgress+1}}</span>
+<div class="jumbotron text-center text-capitalize">
+  <div class="container-fluid" *ngIf="isLoaded === true">
+    <div class="row">
+      <div class="col">
+        <div class="progress">
+          <div class="progress-bar" [style.width.%]="(qnProgress + 1) * 5"></div>
+        </div>
+        <div class="lead">
+          <hr>
+          <h3 class="card-title">{{qnProgress + 1}}</h3>
           <span>Select a correct translation for a word:</span>
-          <h2>{{slicedWords[qnProgress].name}}</h2>
+          <h1>{{slicedWords[qnProgress].name}}</h1>
         </div>
-        <div class="card-action">
-          <ul class="collection answer">
-            <ng-container *ngFor="let option of options">
-              <li *ngIf="option != null" class="collection-item"
-                  (click)="Answer(option, slicedWords[qnProgress].ruName)">
-                {{option}}
-              </li>
-            </ng-container>
-          </ul>
-        </div>
+        <hr>
+        <ul>
+          <ng-container *ngFor="let option of options">
+            <li *ngIf="option != null" class="btn btn-info"
+                (click)="Answer(option, slicedWords[qnProgress].ruName)">
+              {{option}}
+            </li>
+          </ng-container>
+        </ul>
       </div>
     </div>
   </div>

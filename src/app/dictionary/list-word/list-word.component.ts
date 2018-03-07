@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 
-import {Words} from '../../shared/models/words.model';
-import {WordsService} from '../../words.service';
+import { Words } from '../../shared/models/words.model';
+import { WordsService } from '../../words.service';
 
 @Component({
   selector: 'app-list-word',
@@ -15,9 +15,10 @@ export class ListWordComponent implements OnInit, OnDestroy {
   @Input() words: Words[] = [];
   @Output() wordDelete = new EventEmitter<Words>();
   form: FormGroup;
-  sub1: Subscription;
+  subscription: Subscription;
 
-  constructor(private wordsService: WordsService) { }
+  constructor(private wordsService: WordsService) {
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -27,13 +28,14 @@ export class ListWordComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.sub1) {
-      this.sub1.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
   onWordDelete(word: Words) {
-    this.sub1 = this.wordsService.deleteWord(word)
+    this.subscription = this.wordsService
+      .deleteWord(word)
       .subscribe((wordsStream: Words) => {
         this.wordDelete.emit(word);
       });

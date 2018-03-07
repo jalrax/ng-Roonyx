@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
-import {WordsService} from '../words.service';
-import {Words} from '../shared/models/words.model';
-import {Router} from '@angular/router';
+import { WordsService } from '../words.service';
+import { Words } from '../shared/models/words.model';
 
 @Component({
   selector: 'app-dictionary',
@@ -14,13 +14,14 @@ export class DictionaryComponent implements OnInit, OnDestroy {
 
   words: Words[] = [];
   isLoaded = false;
-  sub1: Subscription;
+  subscription: Subscription;
 
   constructor(private wordsService: WordsService, private router: Router) {
   }
 
   ngOnInit() {
-    this.sub1 = this.wordsService.getWords()
+    this.subscription = this.wordsService
+      .getWords()
       .subscribe((words: Words[]) => {
         this.words = words;
         this.isLoaded = true;
@@ -28,8 +29,8 @@ export class DictionaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.sub1) {
-      this.sub1.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 

@@ -1,46 +1,40 @@
 <div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div
-        class="form-group"
-        [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched}"
-      >
-        <label class="control-label" for="word-name">Введите слово</label>
-        <input
-          type="text"
-          id="word-name"
-          class="form-control"
-          formControlName="name"
-        >
-        <span
-          *ngIf="form.get('name').invalid && form.get('name').touched"
-          class="form-help-text"
-        >
-          <span *ngIf="form.get('name')['errors']['required']">Это поле не может быть пустым</span>
-        </span>
-      </div>
-      <div
-        class="form-group"
-        [ngClass]="{'has-error': form.get('ruName').invalid && form.get('ruName').touched}"
-      >
-        <label class="control-label" for="ru-translation">Укажите перевод</label>
-        <input
-          type="text"
-          id="ru-translation"
-          class="form-control"
-          formControlName="ruName"
-        >
-        <span
-          class="form-help-text"
-          *ngIf="form.get('ruName').invalid && form.get('ruName').touched"
-        >
-          <span *ngIf="form.get('ruName')['errors']['required']">Это поле не может быть пустым</span>
-        </span>
-      </div>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="form.invalid"
-      >Добавить
-      </button>
-    </form>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div
+      class="form-group"
+      [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched}">
+      <label class="control-label" for="word-name">Введите слово</label>
+      <input
+        type="text"
+        id="word-name"
+        class="form-control"
+        formControlName="name">
+      <span
+        *ngIf="form.get('name').invalid && form.get('name').touched"
+        class="form-help-text">
+        <span *ngIf="form.get('name')['errors']['required']">Это поле не может быть пустым</span>
+      </span>
+    </div>
+    <div
+      class="form-group"
+      [ngClass]="{'has-error': form.get('ruName').invalid && form.get('ruName').touched}">
+      <label class="control-label" for="ru-translation">Укажите перевод</label>
+      <input
+        type="text"
+        id="ru-translation"
+        class="form-control"
+        formControlName="ruName">
+      <span
+        class="form-help-text"
+        *ngIf="form.get('ruName').invalid && form.get('ruName').touched">
+        <span *ngIf="form.get('ruName')['errors']['required']">Это поле не может быть пустым</span>
+      </span>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="form.invalid">
+      Добавить
+    </button>
+  </form>
 </div>
