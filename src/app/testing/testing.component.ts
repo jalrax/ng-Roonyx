@@ -66,7 +66,9 @@ export class TestingComponent implements OnInit, OnDestroy {
 
     this.buffer = this.wordsBuffer;
     this.buffer.forEach(e => {
-      this.options.push(e.ruName);
+      if (e.ruName !== this.slicedWords[this.qnProgress + 1].ruName) {
+        this.options.push(e.ruName);
+      }
     });
     this.options = TestingComponent.shuffleNSlice(this.options, 5);
     this.options.push(this.slicedWords[this.qnProgress + 1].ruName);

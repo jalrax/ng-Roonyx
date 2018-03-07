@@ -5,7 +5,7 @@
 <div class="text-center">
   <button
     class="btn btn-success"
-    [routerLink]="['/testing']"
+    (click)="onButtonClick()"
   >Перейти к тесту</button>
 </div>
 <section class="section text-center" *ngIf="!isLoaded">Loading...</section>
