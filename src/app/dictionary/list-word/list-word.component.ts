@@ -14,10 +14,11 @@ export class ListWordComponent implements OnInit, OnDestroy {
 
   @Input() words: Words[] = [];
   @Output() wordDelete = new EventEmitter<Words>();
-  form: FormGroup;
-  subscription: Subscription;
 
-  constructor(private wordsService: WordsService) {
+  private form: FormGroup;
+  private subscription: Subscription;
+
+  constructor(private _wordsService: WordsService) {
   }
 
   ngOnInit() {
@@ -34,7 +35,7 @@ export class ListWordComponent implements OnInit, OnDestroy {
   }
 
   onWordDelete(word: Words) {
-    this.subscription = this.wordsService
+    this.subscription = this._wordsService
       .deleteWord(word)
       .subscribe((wordsStream: Words) => {
         this.wordDelete.emit(word);

@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
 })
 export class ResultComponent implements OnInit {
 
-  correctAnswerCount = 0;
+  private correctAnswerCount = 0;
 
-  constructor(private router: Router) {
+  constructor(private _router: Router) {
   }
 
   ngOnInit() {
     if (localStorage.getItem('answers') === null) {
-      this.router.navigate(['/testing']);
+      this._router.navigate(['/testing']);
     }
     const answers = JSON.parse(localStorage.getItem('answers'));
     const ruNames = JSON.parse(localStorage.getItem('ruNames'));

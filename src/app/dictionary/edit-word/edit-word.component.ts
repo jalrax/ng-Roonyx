@@ -15,12 +15,12 @@ export class EditWordComponent implements OnInit, OnDestroy {
   @Input() words: Words[] = [];
   @Output() wordEdit = new EventEmitter<Words>();
 
-  subscription: Subscription;
-  form: FormGroup;
-  currentWordId;
-  currentWord: Words;
+  private subscription: Subscription;
+  private form: FormGroup;
+  private currentWordId;
+  private currentWord: Words;
 
-  constructor(private wordsService: WordsService) {
+  constructor(private _wordsService: WordsService) {
   }
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class EditWordComponent implements OnInit, OnDestroy {
   onSubmit() {
     const formData = this.form.value;
     const word = new Words(formData.name, formData.ruName, +this.currentWordId);
-    this.subscription = this.wordsService
+    this.subscription = this._wordsService
       .updateWord(word)
       .subscribe((wordStream: Words) => {
         this.wordEdit.emit(wordStream);

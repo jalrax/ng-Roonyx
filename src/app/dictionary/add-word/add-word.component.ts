@@ -13,11 +13,10 @@ import { WordsService } from '../../words.service';
 export class AddWordComponent implements OnInit, OnDestroy {
 
   @Output() wordAdd = new EventEmitter<Words>();
-  form: FormGroup;
-  words: Words[] = [];
-  subscription: Subscription;
+  private form: FormGroup;
+  private subscription: Subscription;
 
-  constructor(private wordsService: WordsService) {
+  constructor(private _wordsService: WordsService) {
   }
 
   ngOnInit() {
@@ -35,7 +34,7 @@ export class AddWordComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const formData = this.form.value;
-    this.subscription = this.wordsService
+    this.subscription = this._wordsService
       .addWord(formData)
       .subscribe((word: Words) => {
         this.form.reset();

@@ -12,15 +12,15 @@ import { Words } from '../shared/models/words.model';
 })
 export class DictionaryComponent implements OnInit, OnDestroy {
 
-  words: Words[] = [];
-  isLoaded = false;
-  subscription: Subscription;
+  private words: Words[] = [];
+  private isLoaded = false;
+  private subscription: Subscription;
 
-  constructor(private wordsService: WordsService, private router: Router) {
+  constructor(private _wordsService: WordsService, private _router: Router) {
   }
 
   ngOnInit() {
-    this.subscription = this.wordsService
+    this.subscription = this._wordsService
       .getWords()
       .subscribe((words: Words[]) => {
         this.words = words;
@@ -55,7 +55,7 @@ export class DictionaryComponent implements OnInit, OnDestroy {
       alert('Your words pull contains less than 20 words.' +
         ' You need at least this amount to start a test. Please add a lacking words');
     } else {
-      this.router.navigate(['/testing']);
+      this._router.navigate(['/testing']);
     }
   }
 }

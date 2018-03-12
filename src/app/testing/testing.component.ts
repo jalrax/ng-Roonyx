@@ -13,20 +13,20 @@ import { Words } from '../shared/models/words.model';
 })
 export class TestingComponent implements OnInit, OnDestroy {
 
-  words: Words[] = [];
-  wordsBuffer: Words[] = [];
-  slicedWords: Words[] = [];
-  buffer: Words[] = [];
+  private words: Words[] = [];
+  private wordsBuffer: Words[] = [];
+  private slicedWords: Words[] = [];
+  private buffer: Words[] = [];
 
-  options: string[] = [];
-  answers: string[] = [];
-  ruNames: string[] = [];
+  private options: string[] = [];
+  private answers: string[] = [];
+  private ruNames: string[] = [];
 
-  isLoaded = false;
-  subscription: Subscription;
-  qnProgress = 0;
+  private isLoaded = false;
+  private subscription: Subscription;
+  private qnProgress = 0;
 
-  constructor(private wordsService: WordsService, private router: Router) {
+  constructor(private _wordsService: WordsService, private _router: Router) {
   }
 
   static shuffle(a) {
@@ -43,7 +43,7 @@ export class TestingComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.wordsService
+    this.subscription = this._wordsService
       .getWords()
       .subscribe((words: Words[]) => {
         this.words = words;
@@ -83,7 +83,7 @@ export class TestingComponent implements OnInit, OnDestroy {
     if (this.qnProgress === 20) {
       localStorage.setItem('answers', JSON.stringify(this.answers));
       localStorage.setItem('ruNames', JSON.stringify(this.ruNames));
-      this.router.navigate(['/result']);
+      this._router.navigate(['/result']);
     }
   }
 }
